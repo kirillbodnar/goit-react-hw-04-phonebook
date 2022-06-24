@@ -4,7 +4,6 @@ import { nanoid } from 'nanoid';
 import s from './Form.module.css';
 
 export default function Form({ onAddContact }) {
-  const [id, setId] = useState('');
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -12,10 +11,6 @@ export default function Form({ onAddContact }) {
   const phoneId = nanoid();
 
   const handleInputChange = e => {
-    setId(() => {
-      return nanoid();
-    });
-
     switch (e.currentTarget.name) {
       case 'name':
         setName(e.currentTarget.value);
@@ -30,6 +25,7 @@ export default function Form({ onAddContact }) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const id = nanoid();
     onAddContact({ id, name, number });
     reset();
   };
@@ -37,7 +33,6 @@ export default function Form({ onAddContact }) {
   const reset = () => {
     setName('');
     setNumber('');
-    setId('');
   };
 
   return (
